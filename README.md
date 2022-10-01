@@ -2,6 +2,8 @@
 [![CDNJS](https://img.shields.io/cdnjs/v/flubber22.svg)](https://cdnjs.com/libraries/flubber22)
 # flubber2
 
+this is based on flubber by veltman, but with a few improvements and an async API, just import 'flubber2/async' instead of 'flubber2' to use the async API
+
 Some best-guess methods for smoothly interpolating between 2-D shapes.
 
 ![Flubber2 in action](https://user-images.githubusercontent.com/2120446/27014160-e0ce7c04-4ea7-11e7-8da4-5dde839290eb.gif)
