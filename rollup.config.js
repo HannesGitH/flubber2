@@ -5,9 +5,9 @@ import buble from "rollup-plugin-buble";
 export default {
   input: "index.js",
   output: {
-    file: "build/flubber.js",
+    file: "build/flubber2.js",
     format: "umd",
-    name: "flubber",
+    name: "flubber2",
   },
   plugins: [
     resolve({
