@@ -2,7 +2,7 @@
   "name": "flubber2",
   "version": "0.4.3",
   "description": "Best-guess methods for smoothly interpolating and animating between shapes.",
-  "main": "build/flubber.min.js",
+  "main": "index.js",
   "types": "types",
   "scripts": {
     "test": "babel-tape-runner 'test/**-test.js'",
