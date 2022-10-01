@@ -13,7 +13,7 @@
   "jsnext:main": "index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/veltman/flubber.git"
+    "url": "https://github.com/HannesGitH/flubber2.git"
   },
   "keywords": [
     "shape",
@@ -23,12 +23,12 @@
     "animation",
     "triangulation"
   ],
-  "author": "Noah Veltman (@veltman)",
+  "author": "Hannes (@HannesGitH) and Noah Veltman (@veltman)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/veltman/flubber/issues"
+    "url": "https://github.com/HannesGitH/flubber2/issues"
   },
-  "homepage": "https://github.com/veltman/flubber#readme",
+  "homepage": "https://github.com/HannesGitH/flubber2#readme",
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.4.0",
