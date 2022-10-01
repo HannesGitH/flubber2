@@ -1,9 +1,9 @@
-// import TweenCalculationWorker from "./morphWorker?worker"; //see L6
+import TweenCalculationWorker from "./morphWorker?worker"; //see L6
 import type {TweenInputMessage, TweenResultMessage, Shape, Interpolator} from './interface';
 
 
-const fromToAsync = (from:Shape, to:Shape):Promise<Interpolator> => {
-    const worker = new Worker('./morphWorker', {type: 'module'});//no idea if this works in SSR and CSR
+export const fromToAsync = (from:Shape, to:Shape):Promise<Interpolator> => {
+    const worker = new TweenCalculationWorker('./morphWorker.ts', {type: 'module'});//no idea if this works in SSR and CSR
     worker.postMessage({from, to} as TweenInputMessage);
     return new Promise((resolve, reject) => {
         worker.onmessage = (e:MessageEvent<TweenResultMessage>) => {
@@ -14,5 +14,3 @@ const fromToAsync = (from:Shape, to:Shape):Promise<Interpolator> => {
         }
     });
 }
-
-export default {fromToAsync};

@@ -1,4 +1,4 @@
-import {interpolate} from '../../../types';
+import {interpolate} from '../../..';
 import type {TweenInputMessage, TweenResultMessage} from './interface';
 
 onmessage = (e:MessageEvent<TweenInputMessage>):void => {
