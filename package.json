@@ -1,6 +1,6 @@
 {
   "name": "flubber2",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Best-guess methods for smoothly interpolating and animating between shapes.",
   "main": "index.js",
   "types": "types",

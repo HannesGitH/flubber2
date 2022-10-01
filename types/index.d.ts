@@ -1,6 +1,8 @@
 // No default export
 export default undefined
 
+export type Interpolator = (t: number) => Shape
+
 export type Point = [number, number];
 export type Shape = string | Point[];
 
@@ -8,7 +10,7 @@ export interface InterpolateOptions {
     /**
      * The lower this number is, the smoother the resulting animation will be, at the expense of performance. Represents a number in pixels (if no transforms are involved). Set it to false or Infinity for no smoothing. (default: `10`)
      */
-    maxSegmentLength?: number | false
+    maxSegmentLength?: number 
     /**
      * Whether to output results as an SVG path string or an array of points. (default: `true`)
      */
