@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/veltman/flubber.svg?branch=master)](https://travis-ci.org/veltman/flubber)
-
+[![Build Status](https://travis-ci.org/HannesGitH/flubber2.svg?branch=main)](https://travis-ci.org/HannesGitHflubber2)
+[![CDNJS](https://img.shields.io/cdnjs/v/flubber2.svg)](https://cdnjs.com/libraries/flubber2)
 # flubber
 
 Some best-guess methods for smoothly interpolating between 2-D shapes.
