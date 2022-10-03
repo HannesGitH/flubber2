@@ -22,7 +22,7 @@ export const interpolateSequence = (paths: Shape[], options?:InterpolateSequence
     const interpolator = (t: number) => {
         const scaledt = t * length;
         const index = Math.floor(scaledt);
-        const iinterpolator = interpolators[index];
+        const iinterpolator = interpolators[index-((index >= length)?1:0)];
         return iinterpolator(scaledt - index);
     }
     
