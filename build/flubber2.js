@@ -791,11 +791,6 @@
     });
   };
 
-  var a2c$1 = /*#__PURE__*/Object.freeze({
-    default: a2c,
-    __moduleExports: a2c
-  });
-
   /* eslint-disable space-infix-ops */
 
   // The precision used to consider an ellipse as a circle
@@ -899,15 +894,6 @@
 
   var ellipse = Ellipse;
 
-  var ellipse$1 = /*#__PURE__*/Object.freeze({
-    default: ellipse,
-    __moduleExports: ellipse
-  });
-
-  var a2c$2 = ( a2c$1 && a2c ) || a2c$1;
-
-  var ellipse$2 = ( ellipse$1 && ellipse ) || ellipse$1;
-
   // Class constructor
   //
   function SvgPath(path) {
@@ -991,7 +977,7 @@
 
           // Transform rx, ry and the x-axis-rotation
           var ma = m.toArray();
-          var e = ellipse$2(s[1], s[2], s[3]).transform(ma);
+          var e = ellipse(s[1], s[2], s[3]).transform(ma);
 
           // flip sweep-flag if matrix is not orientation-preserving
           if (ma[0] * ma[3] - ma[1] * ma[2] < 0) {
@@ -1453,7 +1439,7 @@
         nextY = s[7];
       }
 
-      new_segments = a2c$2(x, y, nextX, nextY, s[4], s[5], s[1], s[2], s[3]);
+      new_segments = a2c(x, y, nextX, nextY, s[4], s[5], s[1], s[2], s[3]);
 
       // Degenerated arcs can be ignored by renderer, but should not be dropped
       // to avoid collisions with `S A S` and so on. Replace with empty line.
@@ -1556,14 +1542,7 @@
 
   var svgpath = SvgPath;
 
-  var svgpath$1 = /*#__PURE__*/Object.freeze({
-    default: svgpath,
-    __moduleExports: svgpath
-  });
-
-  var require$$0 = ( svgpath$1 && svgpath ) || svgpath$1;
-
-  var svgpath$2 = require$$0;
+  var svgpath$1 = svgpath;
 
   //Parses an SVG path into an object.
   //Taken from https://github.com/jkroso/parse-svg-path
@@ -2006,7 +1985,7 @@
     return [ x1, y1, x1 - y1*alpha, y1 + x1*alpha, x2 + y2*alpha, y2 - x2*alpha, x2, y2 ];
   }
 
-  function a2c$3(x1, y1, rx, ry, phi, fa, fs, x2, y2) {
+  function a2c$1(x1, y1, rx, ry, phi, fa, fs, x2, y2) {
     var sin_phi = Math.sin(phi * TAU$1 / 360);
     var cos_phi = Math.cos(phi * TAU$1 / 360);
 
@@ -2093,7 +2072,7 @@
       var length = 0;
       var partialLengths = [];
       var curves = [];
-      var res = a2c$3(x0, y0,rx,ry, xAxisRotate, LargeArcFlag,SweepFlag,x,y);
+      var res = a2c$1(x0, y0,rx,ry, xAxisRotate, LargeArcFlag,SweepFlag,x,y);
       res.forEach(function(d){
           var curve = new Bezier(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
           var curveLength = curve.getTotalLength();
@@ -2454,7 +2433,7 @@
   var INVALID_INPUT_ALL = "flubber.all() expects two arrays of equal length as arguments. Each element in both arrays should be an array of [x, y] points or an SVG path string (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d).";
 
   function parse$1(str) {
-    return new svgpath$2(str).abs();
+    return new svgpath$1(str).abs();
   }
 
   function split(parsed) {
@@ -2739,7 +2718,6 @@
           paths = paths.concat( [paths[0]]);
       }
       var interpolators = paths.slice(1).map(function (path, i) {
-          console.log("interpolate", { i: i, 1: paths[i], 2: path });
           return interpolate(paths[i], paths[i + 1], options);
       });
       var length = paths.length - 1;

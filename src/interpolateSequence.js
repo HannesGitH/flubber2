@@ -7,7 +7,6 @@ export const interpolateSequence = (paths, options) => {
         paths = [...paths, paths[0]];
     }
     const interpolators = paths.slice(1).map((path, i) => {
-        console.log("interpolate", { i, 1: paths[i], 2: path });
         return interpolate(paths[i], paths[i + 1], options);
     });
     const length = paths.length - 1;
