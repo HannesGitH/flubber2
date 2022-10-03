@@ -1,13 +1,13 @@
 {
   "name": "flubber2",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Best-guess methods for smoothly interpolating and animating between shapes.",
-  "main": "index.js",
+  "main": "build/flubber2.min.js",
   "types": "types",
   "scripts": {
     "test": "babel-tape-runner 'test/**-test.js'",
-    "pretest": "rm -rf build && mkdir build && rollup --config rollup.config.js",
-    "build": "npm run pretest && uglifyjs -m -c -- build/flubber.js > build/flubber.min.js"
+    "pretest": "rm -rf build && mkdir build && tsc && rollup --config rollup.config.js",
+    "build": "npm run pretest && uglifyjs -m -c -- build/flubber2.js > build/flubber2.min.js"
   },
   "module": "index",
   "jsnext:main": "index",
@@ -46,7 +46,8 @@
     "earcut": "^2.1.1",
     "svg-path-properties": "^0.2.1",
     "svgpath": "^2.5.0",
-    "topojson-client": "^3.0.0"
+    "topojson-client": "^3.0.0",
+    "typescript": "^4.8.4"
   },
   "babel": {
     "presets": [

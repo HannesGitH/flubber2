@@ -1,5 +1,5 @@
-import type { Shape, Interpolator, InterpolateOptions } from "../types";
-import interpolate from "./interpolate";
+import type { Shape, Interpolator, InterpolateOptions, interpolate as ip} from "../types";
+import {interpolate} from "..";
 
 interface InterpolateSequenceOptions extends InterpolateOptions {
   loop?: boolean;
@@ -16,7 +16,7 @@ export const interpolateSequence = (paths: Shape[], options?:InterpolateSequence
 
     const interpolators = paths.slice(1).map((path, i) => {
         console.log("interpolate", {i, 1: paths[i], 2:path});
-        return interpolate(paths[i],paths[i+1],options);
+        return interpolate(paths[i],paths[i+1],options as any);
     })
     const length = paths.length-1;
     const interpolator = (t: number) => {

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.flubber = {})));
+  (factory((global.flubber2 = {})));
 }(this, (function (exports) { 'use strict';
 
   function polygonArea(polygon) {
@@ -791,6 +791,11 @@
     });
   };
 
+  var a2c$1 = /*#__PURE__*/Object.freeze({
+    default: a2c,
+    __moduleExports: a2c
+  });
+
   /* eslint-disable space-infix-ops */
 
   // The precision used to consider an ellipse as a circle
@@ -894,6 +899,15 @@
 
   var ellipse = Ellipse;
 
+  var ellipse$1 = /*#__PURE__*/Object.freeze({
+    default: ellipse,
+    __moduleExports: ellipse
+  });
+
+  var a2c$2 = ( a2c$1 && a2c ) || a2c$1;
+
+  var ellipse$2 = ( ellipse$1 && ellipse ) || ellipse$1;
+
   // Class constructor
   //
   function SvgPath(path) {
@@ -977,7 +991,7 @@
 
           // Transform rx, ry and the x-axis-rotation
           var ma = m.toArray();
-          var e = ellipse(s[1], s[2], s[3]).transform(ma);
+          var e = ellipse$2(s[1], s[2], s[3]).transform(ma);
 
           // flip sweep-flag if matrix is not orientation-preserving
           if (ma[0] * ma[3] - ma[1] * ma[2] < 0) {
@@ -1065,26 +1079,42 @@
   SvgPath.prototype.toString = function () {
     var this$1 = this;
 
-    var elements = [], skipCmd, cmd;
+    var result = '', prevCmd = '', cmdSkipped = false;
 
     this.__evaluateStack();
 
-    for (var i = 0; i < this.segments.length; i++) {
-      // remove repeating commands names
-      cmd = this$1.segments[i][0];
-      skipCmd = i > 0 && cmd !== 'm' && cmd !== 'M' && cmd === this$1.segments[i - 1][0];
-      elements = elements.concat(skipCmd ? this$1.segments[i].slice(1) : this$1.segments[i]);
+    for (var i = 0, len = this.segments.length; i < len; i++) {
+      var segment = this$1.segments[i];
+      var cmd = segment[0];
+
+      // Command not repeating => store
+      if (cmd !== prevCmd || cmd === 'm' || cmd === 'M') {
+        // workaround for FontForge SVG importing bug, keep space between "z m".
+        if (cmd === 'm' && prevCmd === 'z') { result += ' '; }
+        result += cmd;
+
+        cmdSkipped = false;
+      } else {
+        cmdSkipped = true;
+      }
+
+      // Store segment params
+      for (var pos = 1; pos < segment.length; pos++) {
+        var val = segment[pos];
+        // Space can be skipped
+        // 1. After command (always)
+        // 2. For negative value (with '-' at start)
+        if (pos === 1) {
+          if (cmdSkipped && val >= 0) { result += ' '; }
+        } else if (val >= 0) { result += ' '; }
+
+        result += val;
+      }
+
+      prevCmd = cmd;
     }
 
-    return elements.join(' ')
-      // Optimizations: remove spaces around commands & before `-`
-      //
-      // We could also remove leading zeros for `0.5`-like values,
-      // but their count is too small to spend time for.
-      .replace(/ ?([achlmqrstvz]) ?/gi, '$1')
-      .replace(/ \-/g, '-')
-      // workaround for FontForge SVG importing bug
-      .replace(/zm/g, 'z m');
+    return result;
   };
 
 
@@ -1423,7 +1453,7 @@
         nextY = s[7];
       }
 
-      new_segments = a2c(x, y, nextX, nextY, s[4], s[5], s[1], s[2], s[3]);
+      new_segments = a2c$2(x, y, nextX, nextY, s[4], s[5], s[1], s[2], s[3]);
 
       // Degenerated arcs can be ignored by renderer, but should not be dropped
       // to avoid collisions with `S A S` and so on. Replace with empty line.
@@ -1526,7 +1556,14 @@
 
   var svgpath = SvgPath;
 
-  var svgpath$1 = svgpath;
+  var svgpath$1 = /*#__PURE__*/Object.freeze({
+    default: svgpath,
+    __moduleExports: svgpath
+  });
+
+  var require$$0 = ( svgpath$1 && svgpath ) || svgpath$1;
+
+  var svgpath$2 = require$$0;
 
   //Parses an SVG path into an object.
   //Taken from https://github.com/jkroso/parse-svg-path
@@ -1969,7 +2006,7 @@
     return [ x1, y1, x1 - y1*alpha, y1 + x1*alpha, x2 + y2*alpha, y2 - x2*alpha, x2, y2 ];
   }
 
-  function a2c$1(x1, y1, rx, ry, phi, fa, fs, x2, y2) {
+  function a2c$3(x1, y1, rx, ry, phi, fa, fs, x2, y2) {
     var sin_phi = Math.sin(phi * TAU$1 / 360);
     var cos_phi = Math.cos(phi * TAU$1 / 360);
 
@@ -2056,7 +2093,7 @@
       var length = 0;
       var partialLengths = [];
       var curves = [];
-      var res = a2c$1(x0, y0,rx,ry, xAxisRotate, LargeArcFlag,SweepFlag,x,y);
+      var res = a2c$3(x0, y0,rx,ry, xAxisRotate, LargeArcFlag,SweepFlag,x,y);
       res.forEach(function(d){
           var curve = new Bezier(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
           var curveLength = curve.getTotalLength();
@@ -2417,7 +2454,7 @@
   var INVALID_INPUT_ALL = "flubber.all() expects two arrays of equal length as arguments. Each element in both arrays should be an array of [x, y] points or an SVG path string (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d).";
 
   function parse$1(str) {
-    return new svgpath$1(str).abs();
+    return new svgpath$2(str).abs();
   }
 
   function split(parsed) {
@@ -2693,6 +2730,29 @@
 
     return interpolatePoints(fromRing, toRing, string);
   }
+
+  var interpolateSequence$$1 = function (paths, options) {
+      if (paths.length < 2) {
+          throw new Error("interpolateSequence requires at least two shapes");
+      }
+      if (options === null || options === void 0 ? void 0 : options.loop) {
+          paths = paths.concat( [paths[0]]);
+      }
+      var interpolators = paths.slice(1).map(function (path, i) {
+          console.log("interpolate", { i: i, 1: paths[i], 2: path });
+          return interpolate(paths[i], paths[i + 1], options);
+      });
+      var length = paths.length - 1;
+      var interpolator = function (t) {
+          var scaledt = t * length;
+          var index = Math.floor(scaledt);
+          if (index >= length)
+              { index--; }
+          var iinterpolator = interpolators[index];
+          return iinterpolator(scaledt - index);
+      };
+      return interpolator;
+  };
 
   var earcut_1 = earcut;
   var default_1 = earcut;
@@ -4213,6 +4273,7 @@
   }
 
   exports.interpolate = interpolate;
+  exports.interpolateSequence = interpolateSequence$$1;
   exports.separate = separate;
   exports.combine = combine$1;
   exports.interpolateAll = interpolateAll;
