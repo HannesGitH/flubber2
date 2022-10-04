@@ -106,6 +106,9 @@ export function interpolateAll(fromShapeList: Shape[], toShapeList: Shape[], opt
 export function interpolateAll(fromShapeList: Shape[], toShapeList: Shape[], options: SingleInterpolateToStringOptions): (t: number) => string
 export function interpolateAll(fromShapeList: Shape[], toShapeList: Shape[], options: SingleInterpolateToPointsOptions): (t: number) => Point[]
 
+
+export function interpolateSequence(paths: Shape[], options?:InterpolateSequenceOptions): Interpolator
+
 /**
  * A helper function for converting an array of points to an SVG path string.
  */
